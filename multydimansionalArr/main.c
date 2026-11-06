@@ -22,11 +22,23 @@ struct point{
  * @Param a		location of the first point
  * @Param b		location of the second point
  *
- * @Returns  		the array whit the two elements swapped
+ * @Returns  		if the array whit the two elements swapped
  */
 /* ----------------------------------------------------------------------------*/
-int **swapTwoPoint2D(int **arr, struct point a, struct point b);
+int swapTwoPoint2D(int **arr, struct point a, struct point b);
 
+
+/* --------------------------------------------------------------------------*/
+/**
+ * @brief 		a funtion for swap two point 
+ *
+ * @Param x		an element in the array
+ * @Param y		an other element in the array 
+ *
+ * @Returns  		if the two element are swapped
+ */
+/* ----------------------------------------------------------------------------*/
+int swapPoint(int *x, int *y);
 
 /* --------------------------------------------------------------------------*/
 /**
@@ -36,10 +48,10 @@ int **swapTwoPoint2D(int **arr, struct point a, struct point b);
  * @Param rows		the rows of array 
  * @Param column	the column of array
  *
- * @Returns  		the array swapped 
+ * @Returns  		if the array swapped 
  */
 /* ----------------------------------------------------------------------------*/
-int **mirrorAll2D(int **arr, size_t rows, size_t column);
+int mirrorAll2D(int **arr, size_t row, size_t column);
 
 
 /* --------------------------------------------------------------------------*/
@@ -64,7 +76,7 @@ void printAll(int **arr, size_t row, size_t column);
  * @Returns  		populated array
  */
 /* ----------------------------------------------------------------------------*/
-int **populate(int **arr, size_t row, size_t column);
+int populate(int **arr, size_t row, size_t column);
 
 /* --------------------------------------------------------------------------*/
 /**
@@ -100,6 +112,15 @@ int main(int argc, char* argv[]){
 	populate(arr, row, column);
 	printAll(arr, row, column);
 
+	mirrorAll2D(arr, row, column);
+	printAll(arr,row, column);
+
+	struct point a = {0,0};
+	struct point b = {1,1};
+
+	swapTwoPoint2D(arr, a, b);
+	printAll(arr, row, column); 
+
 	for (size_t i = 0; i < row; i++) {
     		free(arr[i]);
 	}
@@ -108,7 +129,7 @@ int main(int argc, char* argv[]){
 	return 0;
 }
 
-int **populate(int **arr, size_t row, size_t column){
+int populate(int **arr, size_t row, size_t column){
 
 	for(size_t i=0; i < row; i++){
 		for (size_t j=0; j < column; j++) {
@@ -116,15 +137,46 @@ int **populate(int **arr, size_t row, size_t column){
 		}
 	}
 
-	return arr;
+	return 1;
 }
 
 void printAll(int **arr, size_t row, size_t column){
 	
 	for(size_t i=0; i < row; i++){
-                    for (size_t j=0; j < column; j++) {
-                            printf("%d ", arr[i][j]);
-                    }
-		    printf("\n");
-            }   
+		for (size_t j=0; j < column; j++) {
+    	       		printf("%d ", arr[i][j]);
+           	
+		}
+		printf("\n");
+          }
+
+	printf("\n");
+}
+
+int mirrorAll2D(int **arr, size_t row, size_t column){
+
+	for (size_t i=0; i < row; i++) {
+		for (size_t j=0; j < column/2; j++) {
+			swapPoint( &arr[i][j] , &arr[row - i - 1][column - j - 1]); 
+		}
+	}
+
+	return 0;
+
+}
+
+int swapPoint(int *x, int *y){
+
+	int temp = *x;
+	*x = *y;
+	*y = temp;
+
+	return 1;
+}
+
+int swapTwoPoint2D(int **arr, struct point a, struct point b){
+
+	swapPoint(&arr[a.x][a.y], &arr[b.x][b.y]);
+
+	return 1;
 }
