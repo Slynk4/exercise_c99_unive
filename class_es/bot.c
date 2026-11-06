@@ -22,13 +22,13 @@ int main(){
 	
 	// obtaining the lenght of the array 
 	float temp;
-	size_t i;
-	for ( i = 0; fscanf(fl, " %f ,", &temp) == 1; i++);
+	size_t nData;
+	for ( nData = 0; fscanf(fl, " %f ,", &temp) == 1; nData++);
 
 	rewind(fl); // relocate the pointer of the start of the file
 
 	// create the array on malloc
-	float *nums = malloc(i * sizeof(float));
+	float *nums = malloc(nData * sizeof(float));
 
 	//  controll if the malloc worcks and in case fre the memory and return an error
 	if (nums == NULL){
@@ -41,17 +41,17 @@ int main(){
 	}
 	
 	// populate the array
-	for (size_t j = 0; j < i && fscanf(fl, " %f ,", &nums[j]) == 1; j++);
+	for (size_t j = 0; j < nData && fscanf(fl, " %f ,", &nums[j]) == 1; j++);
 	
 	// get the max and min value
-	size_t *minMax = get_minMax(nums, 0, i);
+	size_t *minMax = get_minMax(nums, 0, nData);
 
 	// controll if can buy and sell if not controll other path	
 	 if (minMax[1] < minMax[0]) {
 
 		 // controll the two end of the array if the minimun value is after the Maximun
 		size_t *minMax_1 = get_minMax(nums, 0, minMax[1]); // start to Max value
-		size_t *minMax_2 = get_minMax(nums, minMax[0], i); // mi value to the end   
+		size_t *minMax_2 = get_minMax(nums, minMax[0], nData); // mi value to the end   
 		
 		// see the percentage of the earning
 		float guadagno_1 = nums[minMax_1[0]] / nums[minMax_1[1]];
