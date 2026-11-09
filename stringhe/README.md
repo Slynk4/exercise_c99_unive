@@ -3,7 +3,7 @@
 a small project to understand string in c 
 
 ## objective 
-
+[comparazione](main.c)
 compare two string returning the percent of the letter that are equal
 
 ```c
@@ -18,3 +18,30 @@ for (size_t i = 0; i < size; i++) {
     }
 }
 ```
+
+[iterazione](alfabetic.c)
+
+per iterare un array si puo utilizzare un _while (*elemento)_ 
+
+```c
+while ( *lett ) {
+    seen[ *lett - 'a' ] = true;
+    lett++;
+}    
+```
+
+pass all the char in a given string and memorize it in an array of the size of the alfabet 
+
+### N.B.
+
+the array in origin have boolean value, if you use an while cycle that dosen't worck
+it dosen't worck because the ``` *arr ``` can assume 0 and go out of the cycle 
+
+```c
+while ( *arr ) {
+        if (*arr++ == false) {
+        printf(format: "arr %d \n", *arr);           
+        return false;
+    }
+}       
+```      
